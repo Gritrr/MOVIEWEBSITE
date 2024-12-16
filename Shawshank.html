@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #363636;
+        }
+
+        header {
+            background-color: #000000;
+            color: rgb(0, 0, 0.9);
+            text-align: center;
+            /*css ng header*/
+            text-align: center;
+            color: #ff0707;
+            padding: 20px;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer; /*makes the pirate logo clickable */
+            
+        }
+
+        .movie-container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 50px;
+            background-color: #020101;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-trailer video {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+        }
+
+        .movie-info {
+            margin-top: 20px;
+        }
+
+        .movie-title {
+            color: #ff0000;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 20px;
+            color: rgb(255, 252, 252);
+            font-weight: ;
+        }
+
+        .genre, .release-year {
+            font-size: 1;
+            color: #666;
+            margin: 1px;
+        }
+
+       
+    </style>
+    <script>
+        function toggleFullScreen(event) {
+            const videoElement = event.target;
+            
+            if (videoElement.requestFullscreen) {
+                videoElement.requestFullscreen(); // For most browsers
+            } else if (videoElement.mozRequestFullScreen) { // For Firefox
+                videoElement.mozRequestFullScreen();
+            } else if (videoElement.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+                videoElement.webkitRequestFullscreen();
+            } else if (videoElement.msRequestFullscreen) { // For Internet Explorer/Edge
+                videoElement.msRequestFullscreen();
+            }
+        }
+        // Function to redirect to homepage.html
+        function goToMamamia() {
+                    window.location.href = '123.html';
+        }
+        // Function to redirect to homepage.html
+        function goToHomepage() {
+                    window.location.href = 'homepage.html';
+        }
+    </script>
+</head>
+<body>
+
+    <header onclick="goToHomepage()">
+        PIRATE
+    </header>
+
+
+<div class="movie-container">
+    <!-- Movie Trailer Section -->
+    <div class="movie-trailer">
+        
+        <video id="movie-trailer" muted loop autoplay playsinline controls ondblclick="toggleFullScreen(event)">
+            <source src="The Shawshank Redemption (1).mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <!-- Movie Information Section -->
+    <div class="movie-info">
+        <h2 class="movie-title">The Shawshank Redemption</h2>  
+        <p style="font-style: italic;">
+            Based on Stephen King's novella Rita Hayworth and Shawshank Redemption. It is set in the 1940s and follows the story of Andy Dufresne (played by Tim Robbins), a banker who is wrongfully convicted of murdering his wife and her lover. He is sentenced to life imprisonment at Shawshank State Penitentiary, where he befriends Ellis "Red" Redding (played by Morgan Freeman), a long-time inmate who is known for procuring items for other prisoners.
+            The film primarily explores themes of hope, friendship, and resilience. Throughout his time in Shawshank, Andy uses his skills in finance to gain favor with the prison guards and warden, even helping to launder money for the corrupt officials. Meanwhile, Red helps Andy navigate prison life and reflects on his own sense of freedom, especially as he faces the possibility of parole after decades of incarceration.
+            The story gradually builds toward a poignant and surprising conclusion, with Andy making a daring escape from Shawshank, leaving behind a trail of evidence that exposes the corruption at the prison. Red, after being paroled, eventually joins Andy in a peaceful reunion in Mexico, symbolizing redemption and the enduring power of friendship and hope. 
+            The film was initially a box office disappointment but has since become a beloved classic, often regarded as one of the greatest films of all time due to its deep emotional impact and powerful performances.
+        </p>
+        </div>
+        <p class="genre">Genre: Thriller, Mystery</p>
+        <p class="release-year">Release Year: 1994</p>
+        <p>
+            <button onclick="goToMamamia()">RETURN</button>
+        </p>
+       
+    </div>
+</div>
+
+</body>
+</html>
+
