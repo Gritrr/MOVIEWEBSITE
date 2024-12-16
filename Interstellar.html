@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #363636;
+        }
+
+        header {
+            background-color: #000000;
+            color: rgb(0, 0, 0.9);
+            text-align: center;
+            /*css ng header*/
+            text-align: center;
+            color: #ff0707;
+            padding: 20px;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer; /*makes the pirate logo clickable */
+            
+        }
+
+        .movie-container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 50px;
+            background-color: #020101;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-trailer video {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+        }
+
+        .movie-info {
+            margin-top: 20px;
+        }
+
+        .movie-title {
+            color: #ff0000;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 20px;
+            color: rgb(255, 252, 252);
+            font-weight: ;
+        }
+
+        .genre, .release-year {
+            font-size: 1;
+            color: #666;
+            margin: 1px;
+        }
+
+       
+    </style>
+    <script>
+        function toggleFullScreen(event) {
+            const videoElement = event.target;
+            
+            if (videoElement.requestFullscreen) {
+                videoElement.requestFullscreen(); // For most browsers
+            } else if (videoElement.mozRequestFullScreen) { // For Firefox
+                videoElement.mozRequestFullScreen();
+            } else if (videoElement.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+                videoElement.webkitRequestFullscreen();
+            } else if (videoElement.msRequestFullscreen) { // For Internet Explorer/Edge
+                videoElement.msRequestFullscreen();
+            }
+        }
+        // Function to redirect to homepage.html
+        function goToMamamia() {
+                    window.location.href = '123.html';
+        }
+        // Function to redirect to homepage.html
+        function goToHomepage() {
+                    window.location.href = 'homepage.html';
+        }
+    </script>
+</head>
+<body>
+
+    <header onclick="goToHomepage()">
+        PIRATE
+    </header>
+
+
+<div class="movie-container">
+    <!-- Movie Trailer Section -->
+    <div class="movie-trailer">
+        
+        <video id="movie-trailer" muted loop autoplay playsinline controls ondblclick="toggleFullScreen(event)">
+            <source src="Interstellar (1).mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <!-- Movie Information Section -->
+    <div class="movie-info">
+        <h2 class="movie-title">Interstellar</h2>  
+        <p style="font-style: italic;">
+            A science fiction film that explores themes of love, sacrifice, and the survival of humanity. Set in a future where Earth is facing environmental collapse, the film follows a team of astronauts who embark on a space mission to find a new habitable planet for humanity.
+
+            The main character, Cooper (played by Matthew McConaughey), is a former NASA pilot turned farmer who is recruited for a secret mission to travel through a newly discovered wormhole near Saturn. The wormhole leads to distant galaxies, where planets potentially suitable for human life are located. Cooper is joined by a team of astronauts, including Dr. Brand (Anne Hathaway), in a desperate attempt to save humanity from extinction.
+            
+            As they journey through space, they encounter various challenges, including time dilation (where time behaves differently due to the immense gravity of black holes) and the emotional toll of being separated from their loved ones on Earth. Cooper is motivated by the desire to ensure a future for his young daughter, Murph, whom he leaves behind.
+            
+            A central theme of Interstellar is the exploration of time and space, as well as the bonds that connect people across these vast distances. The film combines scientific concepts such as black holes, relativity, and gravitational time dilation with emotional and philosophical elements, particularly the connection between Cooper and his daughter.
+            
+            The film’s conclusion brings a twist, combining science with human emotions, as Cooper learns the true nature of the mission and its connection to the survival of humanity.
+            
+            Interstellar is known for its stunning visuals, scientifically accurate depictions of space phenomena (with the help of physicist Kip Thorne), and its deep exploration of human emotions, love, and sacrifice.
+        </p>
+        </div>
+        <p class="genre">Genre: Action, Drama</p>
+        <p class="release-year">Release Year: 2014</p>
+        <p>
+            <button onclick="goToMamamia()">RETURN</button>
+        </p>
+       
+    </div>
+</div>
+
+</body>
+</html>
+
