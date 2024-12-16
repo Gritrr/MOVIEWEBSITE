@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #363636;
+            color: #fff;
+            padding-top: 150px;
+        }
+
+        header.sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        header.sticky h1 {
+            font-size: 1.5rem;
+        }
+
+        /*css ng header*/
+        header h1 {
+            text-align: center;
+            color: #ff0707;
+            font-weight: bold;
+            padding: 0px;
+            font-size: 80px;
+            transition: font-size 0.10s ease;
+            cursor: pointer;
+            /*makes the pirate logo clickable */
+        }
+
+        /*size nf poster sa slideshow*/
+        .hero-section {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slideshow-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .slideshow-images {
+            display: flex;
+            width: 800%;
+            height: 100%;
+            animation: slide 15s infinite linear;
+        }
+
+        .slideshow-image {
+            flex-shrink: 0;
+            width: 12.5%;
+            height: 100%;
+        }
+
+        .slideshow-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+
+            12.5% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-12.5%);
+            }
+
+            37.5% {
+                transform: translateX(-12.5%);
+            }
+
+            50% {
+                transform: translateX(-25%);
+            }
+
+            62.5% {
+                transform: translateX(-25%);
+            }
+
+            75% {
+                transform: translateX(-37.5%);
+            }
+
+            87.5% {
+                transform: translateX(-37.5%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .movie-section {
+            padding: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ff0000;
+            margin-bottom: 2rem;
+        }
+
+        .top-movies,
+        .top-five {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .movie-card {
+            position: relative;
+            width: 30%;
+            /* Adjust width of movie card */
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card img {
+            width: 100%;
+            /* Ensure image covers the full card */
+            display: block;
+            border-radius: 8px;
+            transition: opacity 0.3s ease;
+        }
+
+        .movie-card video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            /* Hide video initially */
+            border-radius: 8px;
+            transition: opacity 0.3s ease;
+        }
+
+        .movie-card:hover img {
+            opacity: 0;
+            /* Fade image when hovered */
+        }
+
+        .movie-card:hover video {
+            opacity: 1;
+            /* Show video when hovered */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent black overlay */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            /* Initially hidden */
+            transition: opacity 0.3s ease;
+        }
+
+        .movie-card:hover .overlay {
+            opacity: 1;
+            /* Show overlay text when hovered */
+        }
+
+        .overlay p {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+        /*dito yung title at genre */
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            z-index: 1000;
+            width: 250px;
+        }
+
+        /*css ng title movie*/
+        .tooltip h3 {
+            margin-bottom: 0.5rem;
+            color: #ff0000;
+        }
+
+        .tooltip p {
+            font-size: 0.9rem;
+            margin: 0.2rem 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /*dito naman yung space between home button and the posters*/
+        header .qq .ww {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 3;
+
+        }
+
+
+        header .qq .ww :hover {
+            color: #2600ff;
+
+        }
+
+        header .rr {
+            font-size: x-large;
+            text-align: right;
+            padding-right: 50px;
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sticky Header Functionality
+            const header = document.querySelector('header.rr');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('sticky');
+                } else {
+                    header.classList.remove('sticky');
+                }
+            });
+
+            // Movie Card Tooltip and Video Functionality
+            const movieCards = document.querySelectorAll('.movie-card');
+            const tooltip = document.getElementById('tooltip');
+            movieCards.forEach(card => {
+                const video = card.querySelector('video');
+                card.addEventListener('mouseenter', () => {
+                    const title = card.getAttribute('data-title');
+                    const genre = card.getAttribute('data-genre');
+
+                    tooltip.innerHTML = `
+                        <h3>${title}</h3>
+                        <p><strong>Genre:</strong> ${genre}</p>`;
+
+                    tooltip.style.display = 'block';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+
+                video.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                        if (video.requestFullscreen) {
+                            video.requestFullscreen();
+                        }
+                    } else {
+                        video.pause();
+                    }
+                });
+
+                card.addEventListener('mousemove', (e) => {
+                    tooltip.style.left = `${e.pageX + 15}px`;
+                    tooltip.style.top = `${e.pageY + 15}px`;
+                });
+            });
+        });
+        // Function to redirect to homepage.html
+        function goToMamamia() {
+            window.location.href = 'Mamamia.html';
+        }
+        // Function to redirect to homepage.html
+        function goToHomepage() {
+            window.location.href = 'homepage.html';
+        }
+        // Function to redirect to homepage.html
+        function goToTitanic() {
+            window.location.href = 'Titanic.html';
+        }
+        function goToShawshank() {
+            window.location.href = 'Shawshank.html';
+        }
+        function goToConjuring() {
+            window.location.href = 'Conjuring.html';
+        }
+        function goToWrongturn() {
+            window.location.href = 'Wrongturn.html';
+        }
+        function goToFIghtclub() {
+            window.location.href = 'Fightclub.html';
+        }
+        function goToInterstellar() {
+            window.location.href = 'Interstellar.html';
+        }
+        function goToWhiplash() {
+            window.location.href = 'Whiplash.html';
+        }
+        function goToSpyxfamily() {
+            window.location.href = 'Spyxfamily.html';
+        }
+    </script>
+</head>
+
+<body>
+    <header class="rr">
+        <div class="container">
+            <h1 id="pirate" onclick="goToHomepage()">PIRATE</h1> <!-- Added an ID to the "PIRATE" text -->
+            <nav class="qq">
+                <ul class="ww" id="nav-menu"> <!-- Added an ID to the navigation menu -->
+                    <li><a href="homepage.html" id="home-button"></a></li> <!-- Added an ID to the Home button -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- SLIDESHOW -->
+    <main>
+        <section class="hero-section">
+            <div class="slideshow-container">
+                <div class="slideshow-images">
+                    <div class="slideshow-image">
+                        <img src="Spyxfamilycodewhitepstr.jpg" alt="Mamma Mia">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="Theshawshankredemptionpstr.jpg" alt="Shawshank Redemption">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="whiplash.jpeg" alt="Shawshank Redemption">
+                    </div>
+
+                    <div class="slideshow-image">
+                        <img src="Titanicpstr.jpg" alt="Spy Movie">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="Interstellarpstr.jpg" alt="Interstellar">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="Mamamiapstr.jpg" alt="Spy Movie">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="Fightclubpstr.jpg" alt="Spy Movie">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="Interstellarpstr.jpg" alt="Spy Movie">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="Conjuringpstr.jpg" alt="Spy Movie">
+                    </div>
+                    <div class="slideshow-image">
+                        <img src="wrongturnpstr.jpg" alt="Spy Movie">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="movie-section">
+            <h2>Top 3 Rated Movies</h2>
+            <div class="top-movies">
+                <div class="movie-card" data-title="Mamma Mia!" data-genre="Musical, Romantic Comedy"
+                    onclick="goToMamamia()">
+                    <img src="Mamamiapstr.jpg" alt="Mamma Mia Poster">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="Shawshank Redemption" data-genre="Thriller, Mystery" onclick="goToShawshank()">
+                    <img src="Theshawshankredemptionpstr.jpg" alt="Movie 2 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="Interstellar" data-genre="Action, Drama" onclick="goToInterstellar()">
+                    <img src="Interstellarpstr.jpg" alt="Movie 3 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="movie-section">
+            <h2>Top 6 of Our Picks</h2>
+            <div class="top-five">
+                <div class="movie-card" data-title="Spy x Family: Code on"
+                    data-genre="Action, Comedy, Spy, Thriller, Adventure, Animation" onclick="goToSpyxfamily()">
+                    <img src="Spyxfamilycodewhitepstr.jpg" alt="Movie 4 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="whiplash"
+                    data-genre="Action, Comedy, Spy, Thriller, Adventure, Animation" onclick="goToWhiplash()">
+                    <img src="whiplash.jpeg" alt="Movie 4 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="Conjuring" data-genre="Horror, Drama, Mystery, Thriller" onclick="goToConjuring()">
+                    <img src="Conjuringpstr.jpg" alt="Movie 5 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="Wrong Turn 1" data-genre="Horror, Cannibal, Thriller, Action" onclick="goToWrongturn()">
+                    <img src="wrongturnpstr.jpg" alt="Movie 6 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="Fight Club" data-genre="Action, Mystery, Crime Film" onclick="goToFIghtclub()">
+                    <img src="Fightclubpstr.jpg" alt="Movie 7 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                <div class="movie-card" data-title="Titanic" data-genre="Fantasy" onclick="goToTitanic()">
+                    <img src="Titanicpstr.jpg" alt="Movie 8 Cover">
+                    <div class="overlay">
+                        <p>View About</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+    <div id="tooltip" class="tooltip"></div>
+</body>
+
+</html>
